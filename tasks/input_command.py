@@ -3,6 +3,7 @@ import telepot
 from bot_output import BotOutput
 from tasks.base_task import BaseTask
 from user import User
+from database_helper import DatabaseHelper
 
 
 class InputCommand(BaseTask):
@@ -17,9 +18,11 @@ class InputCommand(BaseTask):
                 pass
             elif msg_text == '/advise':
                 # user.next_status = '連續問答'
+                # user.remaining_foods_name = DatabaseHelper.get_all_food_name();
                 pass
             elif msg_text == '/random':
                 # user.next_status = '輸出店家清單'
+                # user.remaining_foods_name.append(DatabaseHelper.get_rand_food())
                 pass
             elif msg_text == '/tourist':
                 # user.next_status = '輸入店家名稱'
