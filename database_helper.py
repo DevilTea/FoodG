@@ -1,5 +1,11 @@
-
+import pymysql
 class DatabaseHelper():
+
+    # connect to db
+    db = pymysql.connect("localhost", "e1018e1018", "eric1315", "foodge")
+
+    # create cursor
+    cursor = db.cursor()
 
     # get a random food name
     # return string
@@ -7,14 +13,28 @@ class DatabaseHelper():
     #           no any food in DB
     @staticmethod
     def get_rand_food():
-        pass
+        sql = """SELECT nameFOOD
+        FROM food
+        ORDER BY RAND()
+        LIMIT 1"""
+
+        cursor.excute(sql)
+        foodName = cursor.fetchone()
+        return foodName
 
     # check if the food name exist
     # input : string food
-    # return boolen
+    # return boolean
     @staticmethod
-    def is_food_name_exist(food):
-        pass
+    def does_food_name_exist(_food):
+        sql = """SELECT
+        EXISTS(SELECT * FROM
+        food
+        WHERE
+        nameFOOD = _food)"""
+        cursor.excute(sql)
+        exist = cursor.fetchone()
+        return exist
 
     # get a list that contain all food names
     # return list<string>
@@ -22,7 +42,23 @@ class DatabaseHelper():
     #        if no any food in DB, return an empty list
     @staticmethod
     def get_all_food_name():
-        pass
+        all = list()
+
+        count = """SELECT *
+        FROM food
+        COUNT(*)"""
+        cursor.excute(count)
+        num = cursor.fetchone()
+
+        for i in range(num):
+            sql = """SELECT *
+            FROM food
+            WHERE nameFOOD"""
+            cursor.excute(sql)
+            data = cursor.fetchone()
+            all.append(data)
+
+        return all
 
     # check if the food have the tag from input
     # input : string food
