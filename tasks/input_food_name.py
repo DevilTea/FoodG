@@ -19,6 +19,7 @@ class InputFoodName(BaseTask):
             elif msg_text == '/quit':
                 user.reset()
             elif True: # database is_food_name_exist(food_name): boolean
+                BotOutput.send_plain_text(bot, user, "我來找找看～")
                 user.restaurants = PlaceDataHelper.get_restaurants(user.location, user.distance, msg_text)
                 if len(user.restaurants) > 0:
                     BotOutput.send_restaurant_list(bot, user, user.restaurants)
