@@ -29,16 +29,14 @@ class BotOutput():
                     "&query_place_id=" + \
                     restaurant['place_id']
         BotOutput.send_markdown_text(bot, user, 
-            "*店家資訊*\n\n" + \
-            "\t\t\t*店名:*\n\n" + \
+            "*-=店家資訊=-*\n\n" + \
+            "\t\t\t*-=店名=-:*\n\n" + \
             "\t\t\t\t\t\t\t\t\t " + restaurant['name'] + "\n\n" + \
-            "\t\t\t*地址:*\n\n" + \
+            "\t\t\t*-=地址:=-*\n\n" + \
             "\t\t\t\t\t\t\t\t\t " + restaurant['vicinity'] + "\n\n" + \
-            "\t\t\t*店名:*\n\n" + \
-            "\t\t\t\t\t\t\t\t\t " + restaurant['name'] + "\n\n" + \
-            "\t\t\t*評分:*\n\n" + \
+            "\t\t\t*-=評分:=-*\n\n" + \
             "\t\t\t\t\t\t\t\t\t " + str(restaurant['rating']) + "\n\n" + \
-            "[在 Google Map 上顯示](" + info_url + ")"
+            "[*在 Google Map 上顯示*](" + info_url + ")"
         )
 
     @staticmethod
