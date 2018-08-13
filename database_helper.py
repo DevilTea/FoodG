@@ -41,7 +41,8 @@ class DatabaseHelper():
     #        if the food has no tag, return an empty list
     @staticmethod
     def get_all_tags_of_food(food):
-
+        pass
+        
     # not necessary
     # # get random tag names in the number of num
     # # input : int num
