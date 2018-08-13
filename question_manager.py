@@ -43,7 +43,7 @@ class QuestionManager():
         if len(tmp_tags == 0):
             return None
 
-        re= random.choice(tmp_tags.keys())
+        re = random.choice(tmp_tags.keys())
         for key, value in tmp_tags:
             re = key if abs(value - (l / 2)) < abs(tmp_tags[re] - (l / 2)) else re
         return re
@@ -65,4 +65,4 @@ class QuestionManager():
         
     @staticmethod
     def get_rand_food():
-        return DatabaseHelper.get_rand_food
+        return DatabaseHelper.get_rand_food()
