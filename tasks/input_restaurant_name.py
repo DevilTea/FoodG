@@ -17,13 +17,21 @@ class InputRestaurantName(BaseTask):
             if msg_text == '/help':
                 pass
             elif msg_text == '/quit':
-                user.next_status = '輸入指令'
+                BotOutput.send_plain_text(bot, user, "下次再來喔！")
+                user.reset()
+            elif msg_text == '算了當我沒說':
+                BotOutput.send_plain_text(bot, user, "下次再來喔！")
+                user.reset()
             elif PlaceDataHelper.is_restaurant_name_exist(msg_text, user.restaurants):
                 restaurant = PlaceDataHelper.get_restaurant_by_name(
                     msg_text, user.restaurants)
                 BotOutput.send_restaurant_info(bot, user, restaurant)
-                user.next_status = '輸入指令'
+
+                BotOutput.send_plain_text(bot, user, "還想再看其他店嗎？")
+                BotOutput.send_restaurant_list(bot, user, user.restaurants)
+                # user.next_status = '輸入指令'
             else:
-                BotOutput.send_plain_text(bot, user, "不存在的店家名稱")
+                BotOutput.send_plain_text(bot, user, "不存在的店家名稱，再來一次")
+                BotOutput.send_restaurant_list(bot, user, user.restaurants)
         else:
             pass

@@ -17,6 +17,7 @@ class InputFoodName(BaseTask):
             if msg_text == '/help':
                 pass
             elif msg_text == '/quit':
+                BotOutput.send_plain_text(bot, user, "下次再來喔！")
                 user.reset()
             elif True: # database is_food_name_exist(food_name): boolean
                 BotOutput.send_plain_text(bot, user, "我來找找看～")
@@ -26,7 +27,8 @@ class InputFoodName(BaseTask):
                     user.next_status = '輸入店家名稱'
                 else:
                     BotOutput.send_plain_text(bot, user, "這附近沒有你要的店家！")
-                    user.next_status = '輸入指令'
+                    BotOutput.send_plain_text(bot, user, "你想要再查詢什麼食物呢？")
+                    # user.next_status = '輸入指令'
             else:
                 # bot_output 食物不存在訊息
                 pass
