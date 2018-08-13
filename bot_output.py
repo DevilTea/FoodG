@@ -44,4 +44,5 @@ class BotOutput():
         reply_keyboard_matrix = []
         for name in restaurants.keys():
             reply_keyboard_matrix.append([name])
+        reply_keyboard_matrix.append(['算了當我沒說'])
         BotOutput.send_plain_text_with_reply_keyboard(bot, user, "選一家店吧！", reply_keyboard_matrix)
