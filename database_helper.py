@@ -60,7 +60,7 @@ class DatabaseHelper():
                 break
             row = temp[0]
 
-        print(all)
+        return all
 
     # check if the food have the tag from input
     # input : string food
@@ -117,7 +117,7 @@ class DatabaseHelper():
                 break
             row = temp[0]
 
-        print(alltag)
+        return alltag
 
 
     #get the statement by tag
