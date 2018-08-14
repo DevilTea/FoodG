@@ -29,14 +29,11 @@ class BotOutput():
                     "&query_place_id=" + \
                     restaurant['place_id']
         BotOutput.send_markdown_text(bot, user, 
-            "*-=店家資訊=-*\n\n" + \
-            "\t\t\t*-=店名=-:*\n\n" + \
-            "\t\t\t\t\t\t\t\t\t " + restaurant['name'] + "\n\n" + \
-            "\t\t\t*-=地址:=-*\n\n" + \
-            "\t\t\t\t\t\t\t\t\t " + restaurant['vicinity'] + "\n\n" + \
-            "\t\t\t*-=評分:=-*\n\n" + \
-            "\t\t\t\t\t\t\t\t\t " + str(restaurant['rating']) + "\n\n" + \
-            "[*在 Google Map 上顯示*](" + info_url + ")"
+            "Foodge找到了～\n\n" + \
+            "🍽店名🍽 \t" + restaurant['name'] + "\n\n" + \
+            "💡評分💡 \t" + str(restaurant['rating']) + "\n\n" + \
+            "🗺地址🗺 \t" + restaurant['vicinity'] + "\n\n" + \
+            "[➡️點擊開啟 Google Map⬅️](" + info_url + ")"
         )
 
     @staticmethod

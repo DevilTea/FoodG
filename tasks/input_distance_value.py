@@ -14,16 +14,17 @@ class InputDistanceValue(BaseTask):
         if content_type == 'text':
             msg_text = msg['text']
             if msg_text == '/help':
-                BotOutput.send_plain_text(bot, user, "foodge提供的服務有：\n\n /set - 更改設定\n /advice - 利用問答題幫你挑食物\n /random - 直接幫你選一種食物\n /tourist - 告訴你附近有什麼美食\n /locate - 告訴你它在哪裡"")
-            elif False: # msg_textw.isDigit()
-                BotOutput.send_plain_text(bot, user, "趕快檢查一下自己是不是打錯英文單字了OAO\nfoodge提供的服務有：\n\ndistance －『設定搜尋範圍』，預設是500公尺內。\n\n再告訴我一次你想要更改什麼設定呢～？")
-            elif False: # 請求輸入正確的參數值、顯示參數型別
-                BotOutput.send_plain_text(bot, user, "嘖嘖你數學不好齁，請給我一個“正整數”\n所以你想要的範圍是？（拜託一定必須要是100~1000內正整數～）")
-            elif False: # 100 < int(msg_text) < 1000
+                BotOutput.send_plain_text(bot, user, "必須要是 100 ~ 1000 內正整數，預設值為 500(m)")
+            elif msg_text == '/quit':
+                BotOutput.send_plain_text(bot, user, "好吧那...需要再叫我囉(ouo)")
+                user.reset()
+            elif not msg_text.isdigit():
+                BotOutput.send_plain_text(bot, user, "你輸入的不是數字呢！必須要是 100 ~ 1000 內正整數")
+            elif int(msg_text) < 100 or int(msg_text) > 1000:
                 BotOutput.send_plain_text(bot, user, "難怪你會沒朋友，就跟你說要“100~1000“內齁\n所以你想要的範圍是？（拜託算我求你，給我個100~1000內正整數吧～）")
             else:
-                # user.distance = int(msg_text)
+                user.distance = int(msg_text)
                 BotOutput.send_plain_text(bot, user, "設定成功囉(๑´ㅁ`)\nfoodge已經是你的人了(誤)")
-            
+                user.reset()
         else:
-            pass
+            BotOutput.send_plain_text(bot, user, "輸入 /help 獲得幫助")

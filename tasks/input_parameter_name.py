@@ -14,10 +14,14 @@ class InputParameterName(BaseTask):
         if content_type == 'text':
             msg_text = msg['text']
             if msg_text == '/help':
-                BotOutput.send_plain_text(bot, user, "foodge提供的服務有：\n\n /set - 更改設定\n /advice - 利用問答題幫你挑食物\n /random - 直接幫你選一種食物\n /tourist - 告訴你附近有什麼美食\n /locate - 告訴你它在哪裡"")
+                BotOutput.send_plain_text(bot, user, "foodge提供的可自訂參數有：\n\n distance －『設定搜尋範圍(m)』，必須要是100~1000內正整數，預設是500公尺。")
+            elif msg_text == '/quit':
+                BotOutput.send_plain_text(bot, user, "好吧那...需要再叫我囉(ouo)")
+                user.reset()
             elif msg_text == 'distance':
-                user.status = "輸入距離"
+                BotOutput.send_plain_text(bot, user, "請輸入你要的搜尋距離喔～！必須要是100~1000內正整數")
+                user.next_status = "輸入距離"
             else:
-                pass
+                BotOutput.send_plain_text(bot, user, "輸入 /help 獲得幫助")
         else:
-            pass
+            BotOutput.send_plain_text(bot, user, "輸入 /help 獲得幫助")

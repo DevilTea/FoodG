@@ -14,6 +14,8 @@ from tasks.input_food_name import InputFoodName
 from tasks.input_restaurant_name import InputRestaurantName
 from tasks.answer_questions import AnswerQuestions
 from tasks.output_restaurants import OutputRestaurants
+from tasks.input_parameter_name import InputParameterName
+from tasks.input_distance_value import InputDistanceValue
 
 BOT_TOKEN = None
 with open('./config.json', 'r') as f:
@@ -22,7 +24,7 @@ with open('./config.json', 'r') as f:
 
 users = {}
 tasks = [InputCommand(), InputFoodName(), InputRestaurantName(),
-         AnswerQuestions(), OutputRestaurants()]
+         AnswerQuestions(), OutputRestaurants(), InputParameterName(), InputDistanceValue()]
 bot = telepot.Bot(BOT_TOKEN)
 
 

@@ -18,6 +18,5 @@ class User():
         self.next_status = '輸入指令'
         self.temp_tag = None
         self.remaining_foods_name = []
-        self.food_name_to_search = None
         self.restaurants = {}
         self.not_ask_tags = []
