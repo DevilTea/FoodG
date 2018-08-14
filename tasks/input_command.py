@@ -15,7 +15,7 @@ class InputCommand(BaseTask):
         if content_type == 'text':
             msg_text = msg['text']
             if msg_text == '/help':
-                BotOutput.send_plain_text(bot, user, "foodge提供的服務有：\n\n /set - 更改設定\n /advice - 利用問答題幫你挑食物\n /random - 直接幫你選一種食物\n /tourist - 告訴你附近有什麼美食\n /locate - 告訴你它在哪裡"")
+                BotOutput.send_plain_text(bot, user, "foodge提供的服務有：\n\n /set - 更改設定\n /advice - 利用問答題幫你挑食物\n /random - 直接幫你選一種食物\n /tourist - 告訴你附近有什麼美食\n /locate - 告訴你它在哪裡")
             elif msg_text == '/advise':
                 # user.next_status = '連續問答'
                 # user.remaining_foods_name = DatabaseHelper.get_all_food_name();
