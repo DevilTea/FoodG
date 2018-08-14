@@ -1,5 +1,11 @@
-
+import pymysql
 class DatabaseHelper():
+
+    # connect to db
+    db = pymysql.connect("localhost", "e1018e1018", "eric1315", "foodge")
+
+    # create cursor
+    cursor = db.cursor()
 
     # get a random food name
     # return string
@@ -7,14 +13,32 @@ class DatabaseHelper():
     #           no any food in DB
     @staticmethod
     def get_rand_food():
-        pass
+        sql = """SELECT nameFOOD
+        FROM food
+        ORDER BY RAND()
+        LIMIT 1"""
+
+        cursor.execute(sql)
+        foodName = cursor.fetchone()[0]
+        return foodName
 
     # check if the food name exist
     # input : string food
-    # return boolen
+    # return boolean
     @staticmethod
-    def is_food_name_exist(food):
-        pass
+    def does_food_name_exist(_food):
+        sql = """SELECT
+        EXISTS(SELECT * FROM
+        food
+        WHERE
+        nameFOOD = '""" + _food + '\')'
+        cursor.execute(sql)
+        exist = cursor.fetchone()[0]
+
+        if exist is 1:
+            return true
+        else:
+            return false
 
     # get a list that contain all food names
     # return list<string>
@@ -22,7 +46,19 @@ class DatabaseHelper():
     #        if no any food in DB, return an empty list
     @staticmethod
     def get_all_food_name():
-        pass
+        all = list()
+        sql = """SELECT nameFOOD FROM food"""
+        cursor.execute(sql)
+        row = cursor.fetchone()[0]
+
+        while row is not None:
+            all.append(row)
+            temp = cursor.fetchone()
+            if temp is None:
+                break
+            row = temp[0]
+
+        print(all)
 
     # check if the food have the tag from input
     # input : string food
@@ -32,7 +68,26 @@ class DatabaseHelper():
     #           the food name do not exist
     @staticmethod
     def do_food_have_tag(food, tag):
-        pass
+
+        attID = """SELECT idATTRIBUTE
+        FROM attribute
+        WHERE nameATTRIBUTE = '""" + tag + '\''
+        cursor.execute(attID)
+        tag = cursor.fetchone()[0]
+
+        foodID = """SELECT idFOOD
+        FROM food
+        WHERE nameFOOD = '""" + food + '\''
+        cursor.execute(foodID)
+        food = cursor.fetchone()[0]
+
+        sql = """SELECT
+                EXISTS(SELECT * 
+                FROM food_has_attribute
+                WHERE FOOD_idFOOD = %d AND ATTRIBUTE_idATTRIBUTE = %d)""" % (food, tag)
+        cursor.execute(sql)
+        data = cursor.fetchone()[0]
+        return data
 
     # get all tags of the food name from input
     # input string food
@@ -41,9 +96,36 @@ class DatabaseHelper():
     #        if the food has no tag, return an empty list
     @staticmethod
     def get_all_tags_of_food(food):
-        pass
-        
-    # not necessary
+        alltag = list()
+
+        tag = """SELECT nameATTRIBUTE
+        FROM attribute, food_has_attribute, food
+        WHERE food.nameFOOD = '""" + food + "\'" + """AND
+        food.idFOOD = food_has_attribute.FOOD_idFOOD AND
+        food_has_attribute.ATTRIBUTE_idATTRIBUTE = attribute.idATTRIBUTE """
+        cursor.execute(tag)
+        row = cursor.fetchone()[0]
+
+        while row is not None:
+            alltag.append(row)
+            temp = cursor.fetchone()
+            if temp is None:
+                break
+            row = temp[0]
+
+        print(alltag)
+
+
+    #get the statement by tag
+    @staticmethod
+    def get_the_statement_by_tag(tag):
+        sql = """SELECT statement
+                FROM attribute
+                WHERE nameATTRIBUTE = '""" + tag + '\''
+        cursor.execute(sql)
+        data = cursor.fetchone()[0]
+        return data
+        # not necessary
     # # get random tag names in the number of num
     # # input : int num
     # # return list<string>
