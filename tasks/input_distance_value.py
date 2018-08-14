@@ -15,7 +15,7 @@ class InputDistanceValue(BaseTask):
             msg_text = msg['text']
             if msg_text == '/help':
                 pass
-            elif False: # msg_text.isDigit()
+            elif False: # msg_textw.isDigit()
                 pass
             elif False: # 100 < int(msg_text) < 1000
                 pass

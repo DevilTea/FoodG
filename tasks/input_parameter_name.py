@@ -17,5 +17,7 @@ class InputParameterName(BaseTask):
                 pass
             elif msg_text == 'distance':
                 user.status = "輸入距離"
+            else:
+                pass
         else:
             pass
