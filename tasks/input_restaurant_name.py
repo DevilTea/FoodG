@@ -20,7 +20,7 @@ class InputRestaurantName(BaseTask):
                 BotOutput.send_plain_text(bot, user, "這樣知道要吃什麼了吧～需要幫忙再叫我齁(ouo)")
                 user.reset()
             elif msg_text == '算了當我沒說':
-                BotOutput.send_plain_text(bot, user, "對不起嗚嗚foodge幫不上忙啊啊啊(;´༎ຶД༎ຶ`)如果原諒我的話隨時可以叫我(´༎ຶД༎ຶ`;)")
+                BotOutput.send_plain_text(bot, user, "對不起嗚嗚foodge幫不上忙啊啊啊(;´༎ຶД༎ຶ`)\n如果原諒我的話隨時可以叫我(´༎ຶД༎ຶ`;)")
                 user.reset()
             elif PlaceDataHelper.is_restaurant_name_exist(msg_text, user.restaurants):
                 restaurant = PlaceDataHelper.get_restaurant_by_name(
