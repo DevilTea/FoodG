@@ -2,7 +2,7 @@ import pymysql
 class DatabaseHelper():
 
     # connect to db
-    db = pymysql.connect("localhost", "e1018e1018", "eric1315", "foodge")
+    db = pymysql.connect("localhost", "root", "", "foodge")
 
     # create cursor
     cursor = db.cursor()
@@ -17,7 +17,7 @@ class DatabaseHelper():
         FROM food
         ORDER BY RAND()
         LIMIT 1"""
-
+        cursor = DatabaseHelper.cursor
         cursor.execute(sql)
         foodName = cursor.fetchone()[0]
         return foodName
@@ -32,13 +32,14 @@ class DatabaseHelper():
         food
         WHERE
         nameFOOD = '""" + _food + '\')'
+        cursor = DatabaseHelper.cursor
         cursor.execute(sql)
         exist = cursor.fetchone()[0]
 
         if exist is 1:
-            return true
+            return True
         else:
-            return false
+            return False
 
     # get a list that contain all food names
     # return list<string>
@@ -48,6 +49,7 @@ class DatabaseHelper():
     def get_all_food_name():
         all = list()
         sql = """SELECT nameFOOD FROM food"""
+        cursor = DatabaseHelper.cursor
         cursor.execute(sql)
         row = cursor.fetchone()[0]
 
@@ -72,6 +74,7 @@ class DatabaseHelper():
         attID = """SELECT idATTRIBUTE
         FROM attribute
         WHERE nameATTRIBUTE = '""" + tag + '\''
+        cursor = DatabaseHelper.cursor
         cursor.execute(attID)
         tag = cursor.fetchone()[0]
 
@@ -103,6 +106,7 @@ class DatabaseHelper():
         WHERE food.nameFOOD = '""" + food + "\'" + """AND
         food.idFOOD = food_has_attribute.FOOD_idFOOD AND
         food_has_attribute.ATTRIBUTE_idATTRIBUTE = attribute.idATTRIBUTE """
+        cursor = DatabaseHelper.cursor
         cursor.execute(tag)
         row = cursor.fetchone()[0]
 
@@ -122,6 +126,7 @@ class DatabaseHelper():
         sql = """SELECT statement
                 FROM attribute
                 WHERE nameATTRIBUTE = '""" + tag + '\''
+        cursor = DatabaseHelper.cursor
         cursor.execute(sql)
         data = cursor.fetchone()[0]
         return data
