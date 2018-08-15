@@ -1,6 +1,8 @@
 import telepot
 from telepot.namedtuple import ReplyKeyboardMarkup, ReplyKeyboardRemove
 
+from util import Util
+
 
 class BotOutput():
     @staticmethod
@@ -28,11 +30,13 @@ class BotOutput():
                     restaurant['name'] + \
                     "&query_place_id=" + \
                     restaurant['place_id']
+        distance = "約 " + str(int(Util.getDistance(user.location, restaurant['location']))) + " 公尺"
         BotOutput.send_markdown_text(bot, user, 
             "Foodge找到了～\n\n" + \
             "🍽店名🍽 \t" + restaurant['name'] + "\n\n" + \
             "💡評分💡 \t" + str(restaurant['rating']) + "\n\n" + \
             "🗺地址🗺 \t" + restaurant['vicinity'] + "\n\n" + \
+            "📍距離📍 \t" + distance + "\n\n" + \
             "[➡️點擊開啟 Google Map⬅️](" + info_url + ")"
         )
 
