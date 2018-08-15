@@ -24,7 +24,7 @@ class InputFoodName(BaseTask):
                 else:
                     BotOutput.send_plain_text(bot, user, "雖然我不太確定你說的東西，但讓我來找找看～")
                 user.restaurants = PlaceDataHelper.get_restaurants(user.location, user.distance, msg_text)
-                if len(user.restaurants) > 0:
+                if len(user.restaurants) > 1:
                     BotOutput.send_restaurant_list(bot, user, user.restaurants)
                     user.next_status = '輸入店家名稱'
                 else:

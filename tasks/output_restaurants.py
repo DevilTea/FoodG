@@ -19,11 +19,15 @@ class OutputRestaurants(BaseTask):
                 BotOutput.send_plain_text(bot, user, "好吧那...需要再叫我囉(ouo)")
                 user.reset()
             elif msg_text == '要':
+                BotOutput.send_plain_text(bot, user, "我來找找看～")
                 food_name = user.remaining_foods_name[0]
                 user.restaurants = PlaceDataHelper.get_restaurants(user.location, user.distance, food_name)
-                BotOutput.send_plain_text(bot, user, "我來找找看～")
-                BotOutput.send_restaurant_list(bot, user, user.restaurants)
-                user.next_status = '輸入店家名稱'
+                if len(user.restaurants) > 1:
+                    BotOutput.send_restaurant_list(bot, user, user.restaurants)
+                    user.next_status = '輸入店家名稱'
+                else:
+                    BotOutput.send_plain_text(bot, user, "這附近沒有你要的店家！")
+                    BotOutput.send_plain_text(bot, user, "你想要再查詢什麼食物呢？")
             elif msg_text == '不要':
                 BotOutput.send_plain_text(bot, user, "好吧那...需要再叫我囉(ouo)")
                 user.reset()
