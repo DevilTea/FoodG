@@ -42,10 +42,30 @@ def on_chat(msg):
         for task in tasks:
             if task.is_enable(user, msg):
                 task.excute(bot, user, msg)
-        
+
         user.update_status()
 
-MessageLoop(bot, on_chat).run_as_thread()
+
+def on_callback_query(msg):
+    pass
+
+
+def on_inline_query(msg):
+    pass
+
+
+def on_chosen_inline_result(msg):
+    pass
+
+
+MessageLoop(bot,
+            {
+                'chat': on_chat,
+                'callback_query': on_callback_query,
+                'inline_query': on_inline_query,
+                'chosen_inline_result': on_chosen_inline_result
+            }
+            ).run_as_thread()
 print("BOT 動起來")
 
 while True:
