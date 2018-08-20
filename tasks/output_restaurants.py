@@ -1,5 +1,5 @@
 import telepot
-
+from telepot.namedtuple import InlineKeyboardButton, InlineKeyboardMarkup
 
 from tasks.base_task import BaseTask
 from user import User
@@ -19,22 +19,6 @@ class OutputRestaurants(BaseTask):
             if msg_text == '/quit':
                 BotOutput.send_plain_text(bot, user, "好吧那...需要再叫我囉(ouo)")
                 user.reset()
-            elif msg_text == '要':
-                BotOutput.send_plain_text(bot, user, "我來找找看～")
-                food_name = user.remaining_foods_name[0]
-                user.restaurants = PlaceDataHelper.get_restaurants(
-                    user.location, user.distance, food_name)
-                if len(user.restaurants) > 1:
-                    BotOutput.send_restaurant_list(bot, user, user.restaurants)
-                    user.next_status = '輸入店家名稱'
-                else:
-                    BotOutput.send_plain_text_remove_reply_keyboard(bot, user, "這附近沒有你要的店家！")
-                    food_name = DatabaseHelper.get_rand_food()
-                    user.remaining_foods_name = [food_name]
-                    BotOutput.send_plain_text_with_reply_keyboard(bot, user, '你要不要吃 ' + food_name + '呢？', [['要', '不要']])
-            elif msg_text == '不要':
-                BotOutput.send_plain_text(bot, user, "好吧那...需要再叫我囉(ouo)")
-                user.reset()
             else:
                 BotOutput.send_plain_text(bot, user, "請告訴我「要」或「不要」喔 (ㆆᴗㆆ)و")
         else:
@@ -42,6 +26,22 @@ class OutputRestaurants(BaseTask):
 
     def on_callback_query(self, bot, user, msg):
         query_id, from_id, query_data = telepot.glance(msg, flavor='callback_query')
+        if query_data == 'yes':
+            BotOutput.send_plain_text(bot, user, "我來找找看～")
+            food_name = user.remaining_foods_name[0]
+            user.restaurants = PlaceDataHelper.get_restaurants(
+                user.location, user.distance, food_name)
+            if len(user.restaurants) > 1:
+                BotOutput.send_restaurant_list(bot, user, user.restaurants)
+                user.next_status = '輸入店家名稱'
+            else:
+                BotOutput.send_plain_text_remove_reply_keyboard(bot, user, "這附近沒有你要的店家！")
+                food_name = DatabaseHelper.get_rand_food()
+                user.remaining_foods_name = [food_name]
+                BotOutput.sendYesNo(bot, user, '你要不要吃 ' + food_name + '呢？')
+        elif query_data == 'no':
+            BotOutput.send_plain_text(bot, user, "好吧那...需要再叫我囉(ouo)")
+            user.reset()
 
     def on_inline_query(self, bot, user, msg):
         pass

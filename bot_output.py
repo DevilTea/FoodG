@@ -81,6 +81,11 @@ class BotOutput():
     @staticmethod
     def send_restaurant_list(bot, user, restaurants):
         inline_keyboard_matrix = BotOutput.get_restaurant_list(restaurants)
-
         return BotOutput.send_plain_text_with_inline_keyboard(
             bot, user, "選一家店吧！", inline_keyboard_matrix)
+
+    @staticmethod
+    def sendYesNo(bot, user, text):
+        inline_keyboard_matrix = [[InlineKeyboardButton(text="要", callback_data="yes"), InlineKeyboardButton(text="不要", callback_data="no")]]
+        return BotOutput.send_plain_text_with_inline_keyboard(
+            bot, user, text, inline_keyboard_matrix)

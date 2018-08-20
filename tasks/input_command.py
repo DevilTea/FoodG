@@ -30,7 +30,7 @@ class InputCommand(BaseTask):
             elif msg_text == '/random':
                 food_name = DatabaseHelper.get_rand_food()
                 user.remaining_foods_name = [food_name]
-                BotOutput.send_plain_text_with_reply_keyboard(bot, user, '你要不要吃 ' + food_name + '呢？', [['要', '不要']])
+                BotOutput.sendYesNo(bot, user, '你要不要吃 ' + food_name + '呢？')
                 user.next_status = '輸出店家清單'
             elif msg_text == '/tourist':
                 BotOutput.send_plain_text(bot, user, "我來隨便找找看 ㄏㄏ")
