@@ -1,49 +1,86 @@
 import telepot
-from telepot.namedtuple import ReplyKeyboardMarkup, ReplyKeyboardRemove
+from telepot.namedtuple import ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
+
+from pprint import pprint
 
 from util import Util
 
 
 class BotOutput():
     @staticmethod
-    def send_plain_text(bot, user, text):
-        reply_markup = ReplyKeyboardRemove()
-        bot.sendMessage(user.chat_id, text, reply_markup=reply_markup,
-                        disable_web_page_preview=True)
+    def send_plain_text(bot, user, text, reply_markup=None):
+        return bot.sendMessage(user.chat_id, text, reply_markup=reply_markup,
+                               disable_web_page_preview=True)
 
     @staticmethod
-    def send_markdown_text(bot, user, text):
-        reply_markup = ReplyKeyboardRemove()
-        bot.sendMessage(user.chat_id, text, parse_mode="Markdown", reply_markup=reply_markup,
-                        disable_web_page_preview=True)
+    def send_markdown_text(bot, user, text, reply_markup=None):
+        return bot.sendMessage(user.chat_id, text, parse_mode="Markdown", disable_web_page_preview=True, reply_markup=reply_markup)
+
+    @staticmethod
+    def edit_markdown_text(bot, user, toedit, text, reply_markup=None):
+        return bot.editMessageText(telepot.message_identifier(toedit), text, parse_mode="Markdown", disable_web_page_preview=True, reply_markup=reply_markup)
+    
+    @staticmethod
+    def send_plain_text_remove_reply_keyboard(bot, user, text, reply_markup=None):
+        r = ReplyKeyboardRemove()
+        return BotOutput.send_plain_text(bot, user, text, r)
+
+    @staticmethod
+    def send_markdown_text_remove_reply_keyboard(bot, user, text, reply_markup=None):
+        r = ReplyKeyboardRemove()
+        return BotOutput.send_markdown_text(bot, user, text, r)
+
+    @staticmethod
+    def edit_markdown_text_remove_reply_keyboard(bot, user, toedit, text, reply_markup=None):
+        r = ReplyKeyboardRemove()
+        return BotOutput.edit_markdown_text(bot, user, text, r)
 
     @staticmethod
     def send_plain_text_with_reply_keyboard(bot, user, text, reply_keyboard_matrix):
         reply_markup = ReplyKeyboardMarkup(
             keyboard=reply_keyboard_matrix, resize_keyboard=True)
-        bot.sendMessage(user.chat_id, text, reply_markup=reply_markup,
-                        disable_web_page_preview=True)
+        return bot.sendMessage(user.chat_id, text, reply_markup=reply_markup,
+                               disable_web_page_preview=True)
+
+    @staticmethod
+    def send_plain_text_with_inline_keyboard(bot, user, text, inline_keyboard_matrix):
+        reply_markup = InlineKeyboardMarkup(
+            inline_keyboard=inline_keyboard_matrix)
+        return bot.sendMessage(user.chat_id, text, reply_markup=reply_markup,
+                               disable_web_page_preview=True)
 
     @staticmethod
     def send_restaurant_info(bot, user, restaurant):
-        info_url = "https://www.google.com/maps/search/?api=1&query=" + \
-                    restaurant['name'] + \
-                    "&query_place_id=" + \
-                    restaurant['place_id']
-        distance = "約 " + str(int(Util.getDistance(user.location, restaurant['location']))) + " 公尺"
-        BotOutput.send_markdown_text(bot, user, 
-            "Foodge找到了～\n\n" + \
-            "🍽店名🍽 \t" + restaurant['name'] + "\n\n" + \
-            "💡評分💡 \t" + str(restaurant['rating']) + "\n\n" + \
-            "🗺地址🗺 \t" + restaurant['vicinity'] + "\n\n" + \
-            "📍距離📍 \t" + distance + "\n\n" + \
-            "[➡️點擊開啟 Google Map⬅️](" + info_url + ")"
-        )
+        if user.saved_info_message:
+            return BotOutput.edit_markdown_text(bot, user, user.saved_info_message, Util.get_restaurant_info_md(user, restaurant))
+        else:
+            return BotOutput.send_markdown_text(
+                bot, user, Util.get_restaurant_info_md(user, restaurant))
+
+    @staticmethod
+    def get_restaurant_list(restaurants):
+        inline_keyboard_matrix = []
+        temp = []
+        for restaurant in restaurants.values():
+            temp.append(InlineKeyboardButton(
+                text=restaurant['name'], callback_data=restaurant['name']))
+        temp.append(InlineKeyboardButton(text='算了當我沒說', callback_data='stop'))
+
+        i = 0
+        while i < len(temp):
+            j = 0
+            row = []
+            while i < len(temp) and j < 2:
+                row.append(temp[i])
+                i += 1
+                j += 1
+            inline_keyboard_matrix.append(row)
+
+        return inline_keyboard_matrix
 
     @staticmethod
     def send_restaurant_list(bot, user, restaurants):
-        reply_keyboard_matrix = []
-        for name in restaurants.keys():
-            reply_keyboard_matrix.append([name])
-        reply_keyboard_matrix.append(['算了當我沒說'])
-        BotOutput.send_plain_text_with_reply_keyboard(bot, user, "選一家店吧！", reply_keyboard_matrix)
+        inline_keyboard_matrix = BotOutput.get_restaurant_list(restaurants)
+
+        return BotOutput.send_plain_text_with_inline_keyboard(
+            bot, user, "選一家店吧！", inline_keyboard_matrix)

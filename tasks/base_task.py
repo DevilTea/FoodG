@@ -5,5 +5,14 @@ class BaseTask():
     def is_enable(self, user, msg):
         pass
 
-    def excute(self, bot, user, msg):
+    def on_chat(self, bot, user, msg):
+        pass
+
+    def on_callback_query(self, bot, user, msg):
+        pass
+
+    def on_inline_query(self, bot, user, msg):
+        pass
+
+    def on_chosen_inline_result(self, bot, user, msg):
         pass

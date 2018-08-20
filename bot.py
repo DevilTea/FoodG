@@ -41,13 +41,22 @@ def on_chat(msg):
 
         for task in tasks:
             if task.is_enable(user, msg):
-                task.excute(bot, user, msg)
+                task.on_chat(bot, user, msg)
 
         user.update_status()
 
 
 def on_callback_query(msg):
-    pass
+    query_id, from_id, query_data = telepot.glance(msg, flavor='callback_query')
+    if not users.get(from_id):
+        users[from_id] = User(from_id)
+    user = users[from_id]
+
+    for task in tasks:
+        if task.is_enable(user, msg):
+            task.on_callback_query(bot, user, msg)
+    bot.answerCallbackQuery
+    user.update_status()
 
 
 def on_inline_query(msg):
@@ -56,7 +65,6 @@ def on_inline_query(msg):
 
 def on_chosen_inline_result(msg):
     pass
-
 
 MessageLoop(bot,
             {

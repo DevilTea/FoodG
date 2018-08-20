@@ -11,7 +11,7 @@ class InputCommand(BaseTask):
     def is_enable(self, user, msg):
         return user.status == "輸入指令"
 
-    def excute(self, bot, user, msg):
+    def on_chat(self, bot, user, msg):
         content_type, chat_type, chat_id = telepot.glance(msg)
         if content_type == 'text':
             msg_text = msg['text']
@@ -29,7 +29,7 @@ class InputCommand(BaseTask):
                 user.next_status = '連續問答'
             elif msg_text == '/random':
                 food_name = DatabaseHelper.get_rand_food()
-                user.remaining_foods_name.append(food_name)
+                user.remaining_foods_name = [food_name]
                 BotOutput.send_plain_text_with_reply_keyboard(bot, user, '你要不要吃 ' + food_name + '呢？', [['要', '不要']])
                 user.next_status = '輸出店家清單'
             elif msg_text == '/tourist':
@@ -45,3 +45,13 @@ class InputCommand(BaseTask):
                 BotOutput.send_plain_text(bot, user, "輸入 /help 獲得幫助")
         else:
             BotOutput.send_plain_text(bot, user, "輸入 /help 獲得幫助")
+    
+
+    def on_callback_query(self, bot, user, msg):
+        pass
+
+    def on_inline_query(self, bot, user, msg):
+        pass
+
+    def on_chosen_inline_result(self, bot, user, msg):
+        pass

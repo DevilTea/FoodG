@@ -10,7 +10,7 @@ class AnswerQuestions(BaseTask):
     def is_enable(self, user, msg):
         return user.status == "連續問答"
 
-    def excute(self, bot, user, msg):
+    def on_chat(self, bot, user, msg):
         content_type, chat_type, chat_id = telepot.glance(msg)
         if content_type == 'text':
             msg_text = msg['text']
@@ -39,3 +39,13 @@ class AnswerQuestions(BaseTask):
             #     user.next_status = '輸出店家清單'
         else:
             pass
+    
+
+    def on_callback_query(self, bot, user, msg):
+        pass
+
+    def on_inline_query(self, bot, user, msg):
+        pass
+
+    def on_chosen_inline_result(self, bot, user, msg):
+        pass

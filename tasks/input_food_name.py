@@ -11,7 +11,7 @@ class InputFoodName(BaseTask):
     def is_enable(self, user, msg):
         return user.status == "輸入食物名稱"
 
-    def excute(self, bot, user, msg):
+    def on_chat(self, bot, user, msg):
         content_type, chat_type, chat_id = telepot.glance(msg)
         if content_type == 'text':
             msg_text = msg['text']
@@ -22,8 +22,10 @@ class InputFoodName(BaseTask):
                 if DatabaseHelper.does_food_name_exist(msg_text):
                     BotOutput.send_plain_text(bot, user, "我來找找看～")
                 else:
-                    BotOutput.send_plain_text(bot, user, "雖然我不太確定你說的東西，但讓我來找找看～")
-                user.restaurants = PlaceDataHelper.get_restaurants(user.location, user.distance, msg_text)
+                    BotOutput.send_plain_text(
+                        bot, user, "雖然我不太確定你說的東西，但讓我來找找看～")
+                user.restaurants = PlaceDataHelper.get_restaurants(
+                    user.location, user.distance, msg_text)
                 if len(user.restaurants) > 1:
                     BotOutput.send_restaurant_list(bot, user, user.restaurants)
                     user.next_status = '輸入店家名稱'
@@ -32,3 +34,12 @@ class InputFoodName(BaseTask):
                     BotOutput.send_plain_text(bot, user, "你想要再查詢什麼食物呢？")
         else:
             BotOutput.send_plain_text(bot, user, "你想要再查詢什麼食物呢？")
+
+    def on_callback_query(self, bot, user, msg):
+        pass
+
+    def on_inline_query(self, bot, user, msg):
+        pass
+
+    def on_chosen_inline_result(self, bot, user, msg):
+        pass

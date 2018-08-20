@@ -9,6 +9,7 @@ class User():
         self.remaining_foods_name = []
         self.restaurants = {}
         self.not_ask_tags = []
+        self.saved_info_message = None
 
     def update_status(self):
         self.status = self.next_status
@@ -20,3 +21,4 @@ class User():
         self.remaining_foods_name = []
         self.restaurants = {}
         self.not_ask_tags = []
+        self.saved_info_message = None
