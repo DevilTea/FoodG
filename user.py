@@ -11,6 +11,7 @@ class User():
         self.restaurants = {}
         self.not_ask_tags = []
         self.saved_info_message = None
+        self.saved_yesno2_message = None
 
     def update_status(self):
         self.status = self.next_status
@@ -23,3 +24,4 @@ class User():
         self.restaurants = {}
         self.not_ask_tags = []
         self.saved_info_message = None
+        self.saved_yesno2_message = None

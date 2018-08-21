@@ -10,7 +10,7 @@ class QuestionManager():
     def has_question_completed(user):
         if len(user.remaining_foods_name) == 0:
             return None
-        return user.remaining_foods_name == 1
+        return len(user.remaining_foods_name) == 1
 
     @staticmethod
     def remove_all_food_with_tag(user, tag):
@@ -40,11 +40,11 @@ class QuestionManager():
                 if not tmp_tags.get(y):
                     tmp_tags[y] = 0
                 tmp_tags[y] += 1
-        if len(tmp_tags == 0):
+        if len(tmp_tags) == 0:
             return None
 
-        re = random.choice(tmp_tags.keys())
-        for key, value in tmp_tags:
+        re = random.choice(list(tmp_tags.keys()))
+        for key, value in tmp_tags.items():
             re = key if abs(value - (l / 2)) < abs(tmp_tags[re] - (l / 2)) else re
         return re
 

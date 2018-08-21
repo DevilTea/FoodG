@@ -50,6 +50,13 @@ class BotOutput():
                                disable_web_page_preview=True)
 
     @staticmethod
+    def edit_plain_text_with_inline_keyboard(bot, user, toedit, text, inline_keyboard_matrix):
+        reply_markup = InlineKeyboardMarkup(
+            inline_keyboard=inline_keyboard_matrix)
+        return bot.editMessageText(telepot.message_identifier(toedit), text, reply_markup=reply_markup,
+                                   disable_web_page_preview=True)
+
+    @staticmethod
     def send_restaurant_info(bot, user, restaurant):
         if user.saved_info_message:
             return BotOutput.edit_markdown_text(bot, user, user.saved_info_message, Util.get_restaurant_info_md(user, restaurant))
@@ -68,7 +75,8 @@ class BotOutput():
                 temp.append(InlineKeyboardButton(
                     text=restaurant['name'] + "\n - 距離約" + str(restaurant['distance']) + "m", callback_data=restaurant['name']))
         elif user.sortby == 'rating':
-            restaurants.sort(key=lambda restaurant: restaurant['rating'], reverse=True)
+            restaurants.sort(
+                key=lambda restaurant: restaurant['rating'], reverse=True)
             for restaurant in restaurants:
                 temp.append(InlineKeyboardButton(
                     text=restaurant['name'] + "\n - 評分" + str(restaurant['rating']) + "⭐️", callback_data=restaurant['name']))
@@ -105,5 +113,10 @@ class BotOutput():
     def sendYesNo2(bot, user, text):
         inline_keyboard_matrix = [[InlineKeyboardButton(text="好", callback_data="yes"), InlineKeyboardButton(
             text="隨便", callback_data="whatever"), InlineKeyboardButton(text="不好", callback_data="no")]]
-        return BotOutput.send_plain_text_with_inline_keyboard(
-            bot, user, text, inline_keyboard_matrix)
+
+        if not user.saved_yesno2_message:
+            return BotOutput.send_plain_text_with_inline_keyboard(
+                bot, user, text, inline_keyboard_matrix)
+        else:
+            return BotOutput.edit_plain_text_with_inline_keyboard(
+                bot, user, user.saved_yesno2_message, text, inline_keyboard_matrix)
