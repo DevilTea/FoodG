@@ -35,7 +35,7 @@ class OutputRestaurants(BaseTask):
                 BotOutput.send_restaurant_list(bot, user, user.restaurants)
                 user.next_status = '輸入店家名稱'
             else:
-                BotOutput.send_plain_text_remove_reply_keyboard(bot, user, "這附近沒有你要的店家！")
+                BotOutput.send_plain_text_remove_reply_keyboard(bot, user, "這附近沒有你要的店家！\n我在幫你 random 一下好了")
                 food_name = DatabaseHelper.get_rand_food()
                 user.remaining_foods_name = [food_name]
                 BotOutput.sendYesNo(bot, user, '你要不要吃 ' + food_name + '呢？')

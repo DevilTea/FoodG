@@ -13,10 +13,10 @@ class AnswerQuestions(BaseTask):
 
     def on_chat(self, bot, user, msg):
         pass
-    
 
     def on_callback_query(self, bot, user, msg):
-        query_id, from_id, query_data = telepot.glance(msg, flavor='callback_query')
+        query_id, from_id, query_data = telepot.glance(
+            msg, flavor='callback_query')
         if query_data == '/quit':
             user.next_status = '輸入指令'
         elif query_data == 'yes':
@@ -28,14 +28,15 @@ class AnswerQuestions(BaseTask):
         elif query_data == 'whatever':
             QuestionManager.add_whatever_tag(user, user.temp_tag)
             pass
-        
+
         if QuestionManager.is_all_tags_disable(user):
             BotOutput.send_plain_text(bot, user, 'e04 什麼都隨便 去用/random啦')
             user.reset()
             return
 
         if QuestionManager.has_question_completed(user):
-            BotOutput.sendYesNo(bot, user, '你要不要吃 ' + user.remaining_foods_name[0] + '呢？')
+            BotOutput.sendYesNo(bot, user, '你要不要吃 ' +
+                                user.remaining_foods_name[0] + '呢？')
             user.next_status = '輸出店家清單'
             return
         else:
@@ -45,15 +46,16 @@ class AnswerQuestions(BaseTask):
 
         user.temp_tag = QuestionManager.get_proper_tag_for_ask(user)
         statment = DatabaseHelper.get_the_statement_by_tag(user.temp_tag)
+        yesno2_message = None
         if statment == 0:
-            BotOutput.sendYesNo2(bot, user, '妳現在想吃' + user.temp_tag + '嗎?')
+            yesno2_message = BotOutput.sendYesNo2(bot, user, '妳現在想吃' + user.temp_tag + '嗎?')
         elif statment == 1:
-            BotOutput.sendYesNo2(bot, user, '覺得' + user.temp_tag + '的食物好嗎?')
+            yesno2_message = BotOutput.sendYesNo2(bot, user, '覺得' + user.temp_tag + '的食物好嗎?')
         elif statment == 2:
-            BotOutput.sendYesNo2(bot, user, '是' + user.temp_tag + '嗎?')
+            yesno2_message = BotOutput.sendYesNo2(bot, user, '是' + user.temp_tag + '嗎?')
         elif statment == 3:
-            BotOutput.sendYesNo2(bot, user, '覺得' + user.temp_tag + '嗎?')
-        
+            yesno2_message = BotOutput.sendYesNo2(bot, user, '覺得' + user.temp_tag + '嗎?')
+        user.saved_yesno2_message = yesno2_message
 
     def on_inline_query(self, bot, user, msg):
         pass

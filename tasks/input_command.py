@@ -34,14 +34,16 @@ class InputCommand(BaseTask):
                 user.remaining_foods_name = DatabaseHelper.get_all_food_name()
                 user.temp_tag = QuestionManager.get_proper_tag_for_ask(user)
                 statment = DatabaseHelper.get_the_statement_by_tag(user.temp_tag)
+                yesno2_message = None
                 if statment == 0:
-                    BotOutput.sendYesNo2(bot, user, '妳現在想吃' + user.temp_tag + '嗎?')
+                    yesno2_message = BotOutput.sendYesNo2(bot, user, '妳現在想吃' + user.temp_tag + '嗎?')
                 elif statment == 1:
-                    BotOutput.sendYesNo2(bot, user, '覺得' + user.temp_tag + '的食物好嗎?')
+                    yesno2_message = BotOutput.sendYesNo2(bot, user, '覺得' + user.temp_tag + '的食物好嗎?')
                 elif statment == 2:
-                    BotOutput.sendYesNo2(bot, user, '是' + user.temp_tag + '嗎?')
+                    yesno2_message = BotOutput.sendYesNo2(bot, user, '是' + user.temp_tag + '嗎?')
                 elif statment == 3:
-                    BotOutput.sendYesNo2(bot, user, '覺得' + user.temp_tag + '嗎?')
+                    yesno2_message = BotOutput.sendYesNo2(bot, user, '覺得' + user.temp_tag + '嗎?')
+                user.saved_yesno2_message = yesno2_message
                 user.next_status = '連續問答'
             elif msg_text == '/random':
                 food_name = DatabaseHelper.get_rand_food()
