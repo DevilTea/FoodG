@@ -9,7 +9,7 @@ class QuestionManager():
     @staticmethod
     def has_question_completed(user):
         if len(user.remaining_foods_name) == 0:
-            return None
+            return 2
         return len(user.remaining_foods_name) == 1
 
     @staticmethod
