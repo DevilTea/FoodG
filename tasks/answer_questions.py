@@ -19,17 +19,13 @@ class AnswerQuestions(BaseTask):
             elif msg_text == '/quit':
                 user.next_status = '輸入指令'
             elif msg_text == '好':
-                # QuestionManager.remove_all_food_not_with_tag(user, user.temp_tag)
-                pass
+                QuestionManager.remove_all_food_not_with_tag(user, user.temp_tag)
             elif msg_text == '不好':
-                # QuestionManager.remove_all_food_with_tag(user, user.temp_tag)
-                pass
+                QuestionManager.remove_all_food_with_tag(user, user.temp_tag)
             elif msg_text == '隨便':
-                # QuestionManager.add_whatever_tag(user, user.temp_tag)
-                pass
+                QuestionManager.add_whatever_tag(user, user.temp_tag)
             else:
-                # bot_output 不是要求的回答
-                pass
+                bot.sendMessage('不是要求的回答')
             # if QuestionManager.is_all_tags_disable(user):
             #     bot_output.too_whatever()
             #     user.reset()
