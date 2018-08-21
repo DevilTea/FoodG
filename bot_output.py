@@ -19,7 +19,7 @@ class BotOutput():
     @staticmethod
     def edit_markdown_text(bot, user, toedit, text, reply_markup=None):
         return bot.editMessageText(telepot.message_identifier(toedit), text, parse_mode="Markdown", disable_web_page_preview=True, reply_markup=reply_markup)
-    
+
     @staticmethod
     def send_plain_text_remove_reply_keyboard(bot, user, text, reply_markup=None):
         r = ReplyKeyboardRemove()
@@ -58,12 +58,12 @@ class BotOutput():
                 bot, user, Util.get_restaurant_info_md(user, restaurant))
 
     @staticmethod
-    def get_restaurant_list(restaurants):
+    def get_restaurant_list(user, restaurants):
         inline_keyboard_matrix = []
         temp = []
         for restaurant in restaurants.values():
             temp.append(InlineKeyboardButton(
-                text=restaurant['name'], callback_data=restaurant['name']))
+                text=restaurant['name'] + " - " + str(int(Util.getDistance(restaurant['location'], user.location))) + "m", callback_data=restaurant['name']))
         temp.append(InlineKeyboardButton(text='算了當我沒說', callback_data='stop'))
 
         i = 0
@@ -80,12 +80,21 @@ class BotOutput():
 
     @staticmethod
     def send_restaurant_list(bot, user, restaurants):
-        inline_keyboard_matrix = BotOutput.get_restaurant_list(restaurants)
+        inline_keyboard_matrix = BotOutput.get_restaurant_list(
+            user, restaurants)
         return BotOutput.send_plain_text_with_inline_keyboard(
             bot, user, "選一家店吧！", inline_keyboard_matrix)
 
     @staticmethod
     def sendYesNo(bot, user, text):
-        inline_keyboard_matrix = [[InlineKeyboardButton(text="要", callback_data="yes"), InlineKeyboardButton(text="不要", callback_data="no")]]
+        inline_keyboard_matrix = [[InlineKeyboardButton(
+            text="要", callback_data="yes"), InlineKeyboardButton(text="不要", callback_data="no")]]
+        return BotOutput.send_plain_text_with_inline_keyboard(
+            bot, user, text, inline_keyboard_matrix)
+
+    @staticmethod
+    def sendYesNo2(bot, user, text):
+        inline_keyboard_matrix = [[InlineKeyboardButton(text="好", callback_data="yes"), InlineKeyboardButton(
+            text="隨便", callback_data="whatever"), InlineKeyboardButton(text="不好", callback_data="no")]]
         return BotOutput.send_plain_text_with_inline_keyboard(
             bot, user, text, inline_keyboard_matrix)
