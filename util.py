@@ -38,7 +38,7 @@ class Util():
 
         return "Foodge找到了～\n\n" + \
                 "🍽店名🍽 \t" + restaurant['name'] + "\n\n" + \
-                "💡評分💡 \t" + str(restaurant['rating']) + "\n\n" + \
+                "⭐️評分⭐️ \t" + str(restaurant['rating']) + "\n\n" + \
                 "🗺地址🗺 \t" + restaurant['vicinity'] + "\n\n" + \
                 "📍距離📍 \t" + distance + "\n\n" + \
                 "[➡️點擊開啟 Google Map⬅️](" + \

@@ -61,9 +61,18 @@ class BotOutput():
     def get_restaurant_list(user, restaurants):
         inline_keyboard_matrix = []
         temp = []
-        for restaurant in restaurants.values():
-            temp.append(InlineKeyboardButton(
-                text=restaurant['name'] + " - " + str(int(Util.getDistance(restaurant['location'], user.location))) + "m", callback_data=restaurant['name']))
+        restaurants = list(restaurants.values())
+        if user.sortby == 'distance':
+            restaurants.sort(key=lambda restaurant: restaurant['distance'])
+            for restaurant in restaurants:
+                temp.append(InlineKeyboardButton(
+                    text=restaurant['name'] + "\n - 距離約" + str(restaurant['distance']) + "m", callback_data=restaurant['name']))
+        elif user.sortby == 'rating':
+            restaurants.sort(key=lambda restaurant: restaurant['rating'], reverse=True)
+            for restaurant in restaurants:
+                temp.append(InlineKeyboardButton(
+                    text=restaurant['name'] + "\n - 評分" + str(restaurant['rating']) + "⭐️", callback_data=restaurant['name']))
+
         temp.append(InlineKeyboardButton(text='算了當我沒說', callback_data='stop'))
 
         i = 0

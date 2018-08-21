@@ -1,6 +1,7 @@
 import json
 
 from place_api import PlaceAPI
+from util import Util
 
 
 PLACE_API_KEY = None
@@ -22,7 +23,8 @@ class PlaceDataHelper():
                 'name': raw_data['name'],
                 'vicinity': raw_data['vicinity'],
                 'rating': raw_data['rating'],
-                'location': raw_data['geometry']['location']
+                'location': raw_data['geometry']['location'],
+                'distance': int(Util.getDistance(raw_data['geometry']['location'], location))
             }
         return places_data
     

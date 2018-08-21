@@ -16,6 +16,7 @@ from tasks.answer_questions import AnswerQuestions
 from tasks.output_restaurants import OutputRestaurants
 from tasks.input_parameter_name import InputParameterName
 from tasks.input_distance_value import InputDistanceValue
+from tasks.input_sortby_value import InputSortbyValue
 
 BOT_TOKEN = None
 with open('./config.json', 'r') as f:
@@ -24,7 +25,7 @@ with open('./config.json', 'r') as f:
 
 users = {}
 tasks = [InputCommand(), InputFoodName(), InputRestaurantName(),
-         AnswerQuestions(), OutputRestaurants(), InputParameterName(), InputDistanceValue()]
+         AnswerQuestions(), OutputRestaurants(), InputParameterName(), InputDistanceValue(), InputSortbyValue()]
 bot = telepot.Bot(BOT_TOKEN)
 
 
@@ -47,7 +48,8 @@ def on_chat(msg):
 
 
 def on_callback_query(msg):
-    query_id, from_id, query_data = telepot.glance(msg, flavor='callback_query')
+    query_id, from_id, query_data = telepot.glance(
+        msg, flavor='callback_query')
     if not users.get(from_id):
         users[from_id] = User(from_id)
     user = users[from_id]
@@ -65,6 +67,7 @@ def on_inline_query(msg):
 
 def on_chosen_inline_result(msg):
     pass
+
 
 MessageLoop(bot,
             {

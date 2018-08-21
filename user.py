@@ -3,6 +3,7 @@ class User():
         self.chat_id = chat_id
         self.location = None
         self.distance = 500
+        self.sortby = 'distance'
         self.status = '輸入指令'
         self.next_status = '輸入指令'
         self.temp_tag = None
