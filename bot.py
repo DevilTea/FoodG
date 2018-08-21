@@ -44,19 +44,27 @@ def on_chat(msg):
             if msg['sticker']['file_id'] in ['CAADBQADCAADF7xqFrI3Fj2Gc75ZAg',
                                              'CAADBQADCwADF7xqFhjJUZGZun80Ag',
                                              'CAADBQADDAADF7xqFuNH4B8OGk_rAg']:
-                bot.sendMessage(chat_id, '這樣很不OK喔')
-                for i in range(6):
-                    bot.sendSticker(chat_id, msg['sticker']['file_id'])
-            elif msg['sticker']['file_id'] in ['CAADBQADAgADF7xqFlkyCVRC-RaQAg',
-                                               'CAADBQADAwADF7xqFlN7n_Y1L8-AAg',
-                                               'CAADBQADBgADF7xqFjTecVxyW5ITAg',
-                                               'CAADBQADCQADF7xqFircCNnjOCp4Ag']:
-                bot.sendMessage(chat_id, '我拍女生是為了素材啦')
-                for i in range(6):
-                    bot.sendSticker(chat_id, msg['sticker']['file_id'])
+                bot.sendPhoto(chat_id, 'AgADBQAD3agxG49V4VcI5YK25kdyqyIu1TIABIaCKA1TYOaijAsDAAEC')
+                bot.sendPhoto(chat_id, 'AgADBQAD3qgxG49V4VfyHlSjhPaNOlNA1jIABCvBWXhpy_GR5AIDAAEC')
+                bot.sendPhoto(chat_id, 'AgADBQAD4KgxG49V4VeP6Ep7wdkI-I0v1TIABFBpcafNC1UugAUDAAEC')
+                bot.sendPhoto(chat_id, 'AgADBQAD4agxG49V4VfNpYSCTEQqJelN1TIABFKObaseDY-a9vwCAAEC')
+                bot.sendPhoto(chat_id, 'AgADBQAD4qgxG49V4VeteSPc-iCtDJhD1jIABNtDEpJxTyXII_oCAAEC')
+                bot.sendPhoto(chat_id, 'AgADBQAD46gxG49V4VfSW1ntVkAlr-2c1jIABJbBpgrzzFpA2X0BAAEC')
+                bot.sendPhoto(chat_id, 'AgADBQAD5KgxG49V4VcnU1Ey0SpUqxgw1TIABGkDCO6NG7sNBAgDAAEC')
+                bot.sendPhoto(chat_id, 'AgADBQAD6KgxG49V4VdFtTCOhPY35BYx1TIABCcZuWydVF6hPQMDAAEC')
+            elif msg['sticker']['file_id'] == 'CAADBQADAQADF7xqFuFr3IshozvPAg':
+                bot.sendPhoto(chat_id, 'AgADBQAD5agxG49V4Ve2jp03-BktG8Cs1jIABCQPeXiMP2i4AX4BAAEC')
+                bot.sendPhoto(chat_id, 'AgADBQAD5qgxG49V4VduuYmO9-NSn0ij1jIABHubaV15DxCC5IIBAAEC')
+                bot.sendPhoto(chat_id, 'AgADBQAD56gxG49V4VeFMGLg5KQCDNyc1jIABK-lltai5981eoIBAAEC')
+                bot.sendPhoto(chat_id, 'AgADBQAD6agxG49V4VeDagYzpSI3U00o1TIABPotq2cnpxr50wYDAAEC')
+                bot.sendPhoto(chat_id, 'AgADBQAD6qgxG49V4VdIgmDmDMrvCXKg1jIABC7rUxLudXCvNIQBAAEC')
+                bot.sendPhoto(chat_id, 'AgADBQAD66gxG49V4VdUwbWJaibp-O9K1TIABFyiU2EwV9jyif0CAAEC')
             elif msg['sticker']['file_id'] == 'CAADBQADDQADF7xqFulLfqNKcL9mAg':
                 bot.sendMessage(chat_id, '(笑容逐漸母湯)')
                 bot.sendSticker(chat_id, 'CAADBQADDQADF7xqFulLfqNKcL9mAg')
+                bot.sendPhoto(chat_id, 'AgADBQAD7KgxG49V4VfqChpBpxGLF02s1jIABL2juZcqHRLTuYMBAAEC')
+                bot.sendPhoto(chat_id, 'AgADBQAD7agxG49V4VeMkpM7EmJhMPYs1TIABMbGHFBzmYaikgQDAAEC')
+                bot.sendPhoto(chat_id, 'AgADBQAD7qgxG49V4VcNfCKNXRbu_KSd1jIABNIYnNohQmcUwYEBAAEC')
 
         for task in tasks:
             if task.is_enable(user, msg):
