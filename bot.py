@@ -40,6 +40,24 @@ def on_chat(msg):
             user.location = msg['location']
             bot.sendMessage(chat_id, "你的位置已更新！")
 
+        if content_type == 'sticker':
+            if msg['sticker']['file_id'] in ['CAADBQADCAADF7xqFrI3Fj2Gc75ZAg',
+                                             'CAADBQADCwADF7xqFhjJUZGZun80Ag',
+                                             'CAADBQADDAADF7xqFuNH4B8OGk_rAg']:
+                bot.sendMessage(chat_id, '這樣很不OK喔')
+                for i in range(6):
+                    bot.sendSticker(chat_id, msg['sticker']['file_id'])
+            elif msg['sticker']['file_id'] in ['CAADBQADAgADF7xqFlkyCVRC-RaQAg',
+                                               'CAADBQADAwADF7xqFlN7n_Y1L8-AAg',
+                                               'CAADBQADBgADF7xqFjTecVxyW5ITAg',
+                                               'CAADBQADCQADF7xqFircCNnjOCp4Ag']:
+                bot.sendMessage(chat_id, '我拍女生是為了素材啦')
+                for i in range(6):
+                    bot.sendSticker(chat_id, msg['sticker']['file_id'])
+            elif msg['sticker']['file_id'] == 'CAADBQADDQADF7xqFulLfqNKcL9mAg':
+                bot.sendMessage(chat_id, '(笑容逐漸母湯)')
+                bot.sendSticker(chat_id, 'CAADBQADDQADF7xqFulLfqNKcL9mAg')
+
         for task in tasks:
             if task.is_enable(user, msg):
                 task.on_chat(bot, user, msg)
