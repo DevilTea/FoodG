@@ -5,7 +5,7 @@ from tasks.base_task import BaseTask
 from user import User
 from database_helper import DatabaseHelper
 from place_data_helper import PlaceDataHelper
-
+from question_manager import QuestionManager
 
 class InputCommand(BaseTask):
     def is_enable(self, user, msg):
@@ -31,7 +31,17 @@ class InputCommand(BaseTask):
             elif not user.location:
                 BotOutput.send_plain_text(bot, user, "請先將你的位置發給我喔～")
             elif msg_text == '/advise':
-                # user.remaining_foods_name = DatabaseHelper.get_all_food_name();
+                user.remaining_foods_name = DatabaseHelper.get_all_food_name()
+                user.temp_tag = QuestionManager.get_proper_tag_for_ask(user)
+                statment = DatabaseHelper.get_the_statement_by_tag(user.temp_tag)
+                if statment == 0:
+                    BotOutput.sendYesNo2(bot, user, '妳現在想吃' + user.temp_tag + '嗎?')
+                elif statment == 1:
+                    BotOutput.sendYesNo2(bot, user, '覺得' + user.temp_tag + '的食物好嗎?')
+                elif statment == 2:
+                    BotOutput.sendYesNo2(bot, user, '是' + user.temp_tag + '嗎?')
+                elif statment == 3:
+                    BotOutput.sendYesNo2(bot, user, '覺得' + user.temp_tag + '嗎?')
                 user.next_status = '連續問答'
             elif msg_text == '/random':
                 food_name = DatabaseHelper.get_rand_food()

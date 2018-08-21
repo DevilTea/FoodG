@@ -38,7 +38,7 @@ class AnswerQuestions(BaseTask):
             BotOutput.sendYesNo(bot, user, '你要不要吃 ' + user.remaining_foods_name[0] + '呢？')
             user.next_status = '輸出店家清單'
             return
-
+        
         user.temp_tag = QuestionManager.get_proper_tag_for_ask(user)
         statment = DatabaseHelper.get_the_statement_by_tag(user.temp_tag)
         if statment == 0:
