@@ -31,7 +31,7 @@ class Util():
         values = {'query': restaurant['name'],
                   'query_place_id': restaurant['place_id']}
         data = parse.urlencode(values).encode('utf-8')
-        info_url = "https://www.google.com/maps/search/?api=1&" + str(data)
+        info_url = "https://www.google.com/maps/search/?api=1&" + str(data)[2:-1]
         distance = "約 " + \
             str(int(Util.getDistance(user.location,
             restaurant['location']))) + " 公尺"
