@@ -17,7 +17,6 @@ class QuestionManager():
         l = len(user.remaining_foods_name)
         user.remaining_foods_name = [x for x in user.remaining_foods_name
                                      if not DatabaseHelper.do_food_have_tag(x, tag)]
-        print(user.remaining_foods_name)
         if len(user.remaining_foods_name) == l:
             return None
 
@@ -26,7 +25,6 @@ class QuestionManager():
         l = len(user.remaining_foods_name)
         user.remaining_foods_name = [x for x in user.remaining_foods_name
                                      if DatabaseHelper.do_food_have_tag(x, tag)]
-        print(user.remaining_foods_name)
         if len(user.remaining_foods_name) == l:
             return None
 

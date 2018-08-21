@@ -1,5 +1,5 @@
 import telepot
-from telepot.namedtuple import ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
+from telepot.namedtuple import ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton
 
 from pprint import pprint
 
@@ -123,8 +123,13 @@ class BotOutput():
 
     @staticmethod
     def sendSticker(bot, user, sticker_id):
-        bot.sendSticker(user, sticker_id)
+        bot.sendSticker(user.chat_id, sticker_id)
     
     @staticmethod
     def sendPhoto(bot, user, photo_id):
-        bot.sendPhoto(user, photo_id)
+        bot.sendPhoto(user.chat_id, photo_id)
+
+    @staticmethod
+    def send_location_request(bot, user, text):
+        reply_keyboard_markup = ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text="送出位置", request_location=True)]])
+        BotOutput.send_plain_text(bot, user, text, reply_keyboard_markup)
