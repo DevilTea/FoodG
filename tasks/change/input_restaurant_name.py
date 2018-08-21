@@ -21,6 +21,7 @@ class InputRestaurantName(BaseTask):
                 user.reset()
             elif msg_text == '算了當我沒說':
                 BotOutput.send_plain_text(bot, user, "對不起嗚嗚foodge幫不上忙啊啊啊(;´༎ຶД༎ຶ`)\n如果原諒我的話隨時可以叫我(´༎ຶД༎ຶ`;)")
+                BotOutput.sendSticker(bot, user, 'CAADBQADBwADF7xqFh0D0ccnyeM3Ag')
                 user.reset()
             elif PlaceDataHelper.is_restaurant_name_exist(msg_text, user.restaurants):
                 restaurant = PlaceDataHelper.get_restaurant_by_name(
@@ -32,6 +33,7 @@ class InputRestaurantName(BaseTask):
                 # user.next_status = '輸入指令'
             else:
                 BotOutput.send_plain_text(bot, user, "不存在的店家名稱，再來一次")
+                BotOutput.sendSticker(bot, user, 'CAADBQADBwADF7xqFh0D0ccnyeM3Ag')
                 BotOutput.send_restaurant_list(bot, user, user.restaurants)
         else:
             pass

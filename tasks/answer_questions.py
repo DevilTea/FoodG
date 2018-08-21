@@ -41,6 +41,7 @@ class AnswerQuestions(BaseTask):
             return
         elif QuestionManager.has_question_completed(user) == 2:
             BotOutput.send_plain_text(bot, user, '哇 我怎麼想不到這樣的食物咧...')
+            BotOutput.sendSticker(bot, user, 'CAADBQADCAADF7xqFrI3Fj2Gc75ZAg')
             user.reset()
             return
 

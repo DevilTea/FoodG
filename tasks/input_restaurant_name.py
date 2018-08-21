@@ -21,6 +21,7 @@ class InputRestaurantName(BaseTask):
             elif msg_text == '/quit':
                 BotOutput.send_plain_text(
                     bot, user, "這樣知道要吃什麼了吧～需要幫忙再叫我齁(ouo)")
+                BotOutput.sendSticker(bot, user, 'CAADBQADCQADF7xqFircCNnjOCp4Ag')
                 user.reset()
             # elif msg_text == '算了當我沒說':
             #     BotOutput.send_plain_text(

@@ -17,6 +17,7 @@ class InputFoodName(BaseTask):
             msg_text = msg['text']
             if msg_text == '/quit':
                 BotOutput.send_plain_text(bot, user, "好吧那...需要再叫我囉(ouo)")
+                BotOutput.sendSticker(bot, user, 'CAADBQADCQADF7xqFircCNnjOCp4Ag')
                 user.reset()
             else:
                 if DatabaseHelper.does_food_name_exist(msg_text):
@@ -24,6 +25,7 @@ class InputFoodName(BaseTask):
                 else:
                     BotOutput.send_plain_text(
                         bot, user, "雖然我不太確定你說的東西，但讓我來找找看～")
+                    BotOutput.sendSticker(bot, user, 'CAADBQADBgADF7xqFjTecVxyW5ITAg')
                 user.restaurants = PlaceDataHelper.get_restaurants(
                     user.location, user.distance, msg_text)
                 if len(user.restaurants) > 1:

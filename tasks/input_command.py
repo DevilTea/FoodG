@@ -30,6 +30,7 @@ class InputCommand(BaseTask):
                 user.next_status = '輸入修改參數名'
             elif not user.location:
                 BotOutput.send_plain_text(bot, user, "請先將你的位置發給我喔～")
+                BotOutput.sendSticker(bot, user, 'CAADBQADAgADF7xqFlkyCVRC-RaQAg')
             elif msg_text == '/advise':
                 user.remaining_foods_name = DatabaseHelper.get_all_food_name()
                 user.temp_tag = QuestionManager.get_proper_tag_for_ask(user)

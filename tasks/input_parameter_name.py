@@ -21,6 +21,7 @@ class InputParameterName(BaseTask):
                                 "\n sortby －『設定店家排序依據』，必須要是 distance 或是 rating，預設是 distance。")
             elif msg_text == '/quit':
                 BotOutput.send_plain_text(bot, user, "好吧那...需要再叫我囉(ouo)")
+                BotOutput.sendSticker(bot, user, 'CAADBQADCQADF7xqFircCNnjOCp4Ag')
                 user.reset()
             elif msg_text == 'distance':
                 BotOutput.send_plain_text(
@@ -32,8 +33,10 @@ class InputParameterName(BaseTask):
                 user.next_status = "輸入排序依據"
             else:
                 BotOutput.send_plain_text(bot, user, "輸入 /help 獲得幫助")
+                BotOutput.sendSticker(bot, user, 'CAADBQADDAADF7xqFuNH4B8OGk_rAg')
         else:
             BotOutput.send_plain_text(bot, user, "輸入 /help 獲得幫助")
+            BotOutput.sendSticker(bot, user, 'CAADBQADDAADF7xqFuNH4B8OGk_rAg')
 
     def on_callback_query(self, bot, user, msg):
         pass

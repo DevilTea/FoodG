@@ -17,8 +17,10 @@ class InputDistanceValue(BaseTask):
             if msg_text == '/help':
                 BotOutput.send_plain_text(
                     bot, user, "必須要是 100 ~ 1000 內正整數，預設值為 500(m)")
+                BotOutput.sendSticker(bot, user, 'CAADBQADAQADF7xqFuFr3IshozvPAg')
             elif msg_text == '/quit':
                 BotOutput.send_plain_text(bot, user, "好吧那...需要再叫我囉(ouo)")
+                BotOutput.sendSticker(bot, user, 'CAADBQADCQADF7xqFircCNnjOCp4Ag')
                 user.reset()
             elif not msg_text.isdigit():
                 BotOutput.send_plain_text(

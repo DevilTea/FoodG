@@ -28,6 +28,7 @@ class OutputRestaurants(BaseTask):
         query_id, from_id, query_data = telepot.glance(msg, flavor='callback_query')
         if query_data == 'yes':
             BotOutput.send_plain_text(bot, user, "我來找找看～")
+            BotOutput.sendSticker(bot, user, 'CAADBQADBQADF7xqFpLLOHDNKtayAg')
             food_name = user.remaining_foods_name[0]
             user.restaurants = PlaceDataHelper.get_restaurants(
                 user.location, user.distance, food_name)
@@ -41,6 +42,7 @@ class OutputRestaurants(BaseTask):
                 BotOutput.sendYesNo(bot, user, '你要不要吃 ' + food_name + '呢？')
         elif query_data == 'no':
             BotOutput.send_plain_text(bot, user, "好吧那...需要再叫我囉(ouo)")
+            BotOutput.sendSticker(bot, user, 'CAADBQADCwADF7xqFhjJUZGZun80Ag')
             user.reset()
 
     def on_inline_query(self, bot, user, msg):

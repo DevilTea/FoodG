@@ -124,3 +124,7 @@ class BotOutput():
     @staticmethod
     def sendSticker(bot, user, sticker_id):
         bot.sendSticker(user, sticker_id)
+    
+    @staticmethod
+    def sendPhoto(bot, user, photo_id):
+        bot.sendPhoto(user, photo_id)

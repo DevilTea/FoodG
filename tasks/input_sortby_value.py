@@ -19,10 +19,12 @@ class InputSortbyValue(BaseTask):
                     bot, user, "必須要是 distance 或是 rating，預設是 distance。")
             elif msg_text == '/quit':
                 BotOutput.send_plain_text(bot, user, "好吧那...需要再叫我囉(ouo)")
+                BotOutput.sendSticker(bot, user, 'CAADBQADAQADF7xqFuFr3IshozvPAg')
                 user.reset()
             elif msg_text != 'distance' and msg_text != 'rating':
                 BotOutput.send_plain_text(
                     bot, user, "難怪你會沒朋友，就跟你說要 distance 或是 rating 齁\n所以你想要的範圍是？（拜託算我求你，給我 distance 或是 rating 吧～）")
+                BotOutput.sendSticker(bot, user, 'CAADBQADDAADF7xqFuNH4B8OGk_rAg')
             else:
                 user.sortby = msg_text
                 BotOutput.send_plain_text(
