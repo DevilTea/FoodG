@@ -20,7 +20,7 @@ class InputCommand(BaseTask):
                     bot, user, "Hello 我是 Foodge，\n輸入 /help 來瞭解怎麼操\n作我喔 <3")
             elif msg_text == '/help':
                 BotOutput.send_plain_text(
-                    bot, user, "foodge提供的服務有：\n\n /set - 更改設定\n /advice - 利用問答題幫你挑食物\n /random - 直接幫你選一種食物\n /tourist - 告訴你附近有什麼美食\n /locate - 告訴你它在哪裡")
+                    bot, user, "foodge提供的服務有：\n\n /set - 更改設定\n /advise - 利用問答題幫你挑食物\n /random - 直接幫你選一種食物\n /tourist - 告訴你附近有什麼美食\n /locate - 告訴你它在哪裡")
             elif msg_text == '/set':
                 BotOutput.send_plain_text(
                     bot, user, "想要讓foodge屬於你嗎(o´罒`o)\n歡迎使用我們的set功能，\n 只要輸入以下的英文單字，\n就可以客製化你自己的foodge囉!!\nfoodge提供的可自訂參數有：\n" + \
