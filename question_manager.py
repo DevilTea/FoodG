@@ -16,7 +16,7 @@ class QuestionManager():
     def remove_all_food_with_tag(user, tag):
         l = len(user.remaining_foods_name)
         user.remaining_foods_name = [x for x in user.remaining_foods_name
-                                     if tag not in DatabaseHelper.get_all_tags_of_food(x)]
+                                     if not DatabaseHelper.do_food_have_tag(x, tag)]
         if len(user.remaining_foods_name) == l:
             return None
 
@@ -24,7 +24,7 @@ class QuestionManager():
     def remove_all_food_not_with_tag(user, tag):
         l = len(user.remaining_foods_name)
         user.remaining_foods_name = [x for x in user.remaining_foods_name
-                                     if tag in DatabaseHelper.get_all_tags_of_food(x)]
+                                     if not DatabaseHelper.do_food_have_tag(x, tag)]
         if len(user.remaining_foods_name) == l:
             return None
 
