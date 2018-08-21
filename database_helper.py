@@ -130,7 +130,8 @@ class DatabaseHelper():
         cursor.execute(sql)
         data = cursor.fetchone()[0]
         return data
-        # not necessary
+
+    # not necessary
     # # get random tag names in the number of num
     # # input : int num
     # # return list<string>
