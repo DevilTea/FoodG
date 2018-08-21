@@ -19,24 +19,25 @@ class AnswerQuestions(BaseTask):
         query_id, from_id, query_data = telepot.glance(msg, flavor='callback_query')
         if query_data == '/quit':
             user.next_status = '輸入指令'
-        elif query_data == '好':
-            # QuestionManager.remove_all_food_not_with_tag(user, user.temp_tag)
+        elif query_data == 'yes':
+            QuestionManager.remove_all_food_not_with_tag(user, user.temp_tag)
             pass
-        elif query_data == '不好':
-            # QuestionManager.remove_all_food_with_tag(user, user.temp_tag)
+        elif query_data == 'no':
+            QuestionManager.remove_all_food_with_tag(user, user.temp_tag)
             pass
-        elif query_data == '隨便':
-            # QuestionManager.add_whatever_tag(user, user.temp_tag)
+        elif query_data == 'whatever':
+            QuestionManager.add_whatever_tag(user, user.temp_tag)
             pass
         
-        # if QuestionManager.is_all_tags_disable(user):
-        #     bot_output.too_whatever()
-        #     user.reset()
-        #     return
+        if QuestionManager.is_all_tags_disable(user):
+            BotOutput.send_plain_text(bot, user, 'e04 什麼都隨便 去用/random啦')
+            user.reset()
+            return
 
-        # if QuestionManager.has_question_completed(user):
-        #     bot_output.ask_whether_list(user): void
-        #     user.next_status = '輸出店家清單'
+        if QuestionManager.has_question_completed(user):
+            BotOutput.sendYesNo(bot, user, '你要不要吃 ' + user.remaining_foods_name[0] + '呢？')
+            user.next_status = '輸出店家清單'
+            return
 
         user.temp_tag = QuestionManager.get_proper_tag_for_ask(user)
         statment = DatabaseHelper.get_the_statement_by_tag(user.temp_tag)
