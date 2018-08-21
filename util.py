@@ -36,7 +36,7 @@ class Util():
             str(int(Util.getDistance(user.location,
             restaurant['location']))) + " 公尺"
 
-        return "Foodge找到了～\n\n" + \
+        return "ლ(◉◞౪◟◉ )ლ\nFoodge找到了～\n\n" + \
                 "🍽店名🍽 \t" + restaurant['name'] + "\n\n" + \
                 "⭐️評分⭐️ \t" + str(restaurant['rating']) + "\n\n" + \
                 "🗺地址🗺 \t" + restaurant['vicinity'] + "\n\n" + \

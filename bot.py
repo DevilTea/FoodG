@@ -9,6 +9,7 @@ from telepot.loop import MessageLoop
 
 # 本地套件
 from user import User
+from bot_output import BotOutput
 from tasks.input_command import InputCommand
 from tasks.input_food_name import InputFoodName
 from tasks.input_restaurant_name import InputRestaurantName
@@ -38,7 +39,7 @@ def on_chat(msg):
 
         if content_type == 'location':
             user.location = msg['location']
-            bot.sendMessage(chat_id, "你的位置已更新！")
+            BotOutput.send_plain_text_remove_reply_keyboard(bot, user, "你的位置已更新！")
         # elif content_type == 'sticker':
         #     if msg['sticker']['file_id'] in ['CAADBQADCAADF7xqFrI3Fj2Gc75ZAg',
         #                                      'CAADBQADCwADF7xqFhjJUZGZun80Ag',

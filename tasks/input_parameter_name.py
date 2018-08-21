@@ -16,7 +16,7 @@ class InputParameterName(BaseTask):
             msg_text = msg['text']
             if msg_text == '/help':
                 BotOutput.send_plain_text(
-                    bot, user, "foodge提供的可自訂參數有：\n" + \
+                    bot, user, "•_ゝ•foodge提供的可自訂參數有：\n" + \
                                 "\n distance －『設定搜尋範圍(m)』，必須要是100~1000內正整數，預設是500公尺。" + \
                                 "\n sortby －『設定店家排序依據』，必須要是 distance 或是 rating，預設是 distance。")
             elif msg_text == '/quit':
@@ -25,11 +25,11 @@ class InputParameterName(BaseTask):
                 user.reset()
             elif msg_text == 'distance':
                 BotOutput.send_plain_text(
-                    bot, user, "請輸入你要的搜尋距離喔～！必須要是100~1000內正整數")
+                    bot, user, "請輸入你要的搜尋距離喔～！必須要是100~1000內正整數( ¯•ω•¯ )")
                 user.next_status = "輸入距離"
             elif msg_text == 'sortby':
                 BotOutput.send_plain_text(
-                    bot, user, "請輸入你要的店家排序依據喔～！必須要是 distance 或是 rating")
+                    bot, user, "請輸入你要的店家排序依據喔～！必須要是 distance 或是 rating( ¯•ω•¯ )")
                 user.next_status = "輸入排序依據"
             else:
                 BotOutput.send_plain_text(bot, user, "輸入 /help 獲得幫助")

@@ -16,7 +16,7 @@ class InputSortbyValue(BaseTask):
             msg_text = msg['text']
             if msg_text == '/help':
                 BotOutput.send_plain_text(
-                    bot, user, "必須要是 distance 或是 rating，預設是 distance。")
+                    bot, user, "ლ(´•д• ̀ლ必須要是 distance 或是 rating，預設是 distance。")
             elif msg_text == '/quit':
                 BotOutput.send_plain_text(bot, user, "好吧那...需要再叫我囉(ouo)")
                 BotOutput.sendSticker(bot, user, 'CAADBQADAQADF7xqFuFr3IshozvPAg')

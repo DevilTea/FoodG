@@ -36,11 +36,11 @@ class AnswerQuestions(BaseTask):
 
         if QuestionManager.has_question_completed(user):
             BotOutput.sendYesNo(bot, user, '你要不要吃 ' +
-                                user.remaining_foods_name[0] + '呢？')
+                                user.remaining_foods_name[0] + '呢(°ཀ°)？')
             user.next_status = '輸出店家清單'
             return
         elif QuestionManager.has_question_completed(user) == 2:
-            BotOutput.send_plain_text(bot, user, '哇 我怎麼想不到這樣的食物咧...')
+            BotOutput.send_plain_text(bot, user, '哇 我怎麼想不到這樣的食物咧ヾ(;ﾟ;Д;ﾟ;)ﾉﾞ...')
             BotOutput.sendSticker(bot, user, 'CAADBQADCAADF7xqFrI3Fj2Gc75ZAg')
             user.reset()
             return

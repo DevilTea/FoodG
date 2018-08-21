@@ -16,7 +16,7 @@ class InputDistanceValue(BaseTask):
             msg_text = msg['text']
             if msg_text == '/help':
                 BotOutput.send_plain_text(
-                    bot, user, "必須要是 100 ~ 1000 內正整數，預設值為 500(m)")
+                    bot, user, "ლ(´•д• ̀ლ必須要是 100 ~ 1000 內正整數，預設值為 500(m)")
                 BotOutput.sendSticker(bot, user, 'CAADBQADAQADF7xqFuFr3IshozvPAg')
             elif msg_text == '/quit':
                 BotOutput.send_plain_text(bot, user, "好吧那...需要再叫我囉(ouo)")
@@ -24,11 +24,11 @@ class InputDistanceValue(BaseTask):
                 user.reset()
             elif not msg_text.isdigit():
                 BotOutput.send_plain_text(
-                    bot, user, "你輸入的不是數字呢！必須要是 100 ~ 1000 內正整數")
+                    bot, user, "ლ(´•д• ̀ლ你輸入的不是數字呢！必須要是 100 ~ 1000 內正整數")
                 BotOutput.sendSticker(bot, user, 'CAADBQADAwADF7xqFlN7n_Y1L8-AAg')
             elif int(msg_text) < 100 or int(msg_text) > 1000:
                 BotOutput.send_plain_text(
-                    bot, user, "難怪你會沒朋友，就跟你說要“100~1000“內齁\n所以你想要的範圍是？（拜託算我求你，給我個100~1000內正整數吧～）")
+                    bot, user, "難怪你會沒朋友ლ(´•д• ̀ლ，就跟你說要“100~1000“內齁\n所以你想要的範圍是？（拜託算我求你，給我個100~1000內正整數吧～）")
                 BotOutput.sendSticker(bot, user, 'CAADBQADAwADF7xqFlN7n_Y1L8-AAg')
             else:
                 user.distance = int(msg_text)

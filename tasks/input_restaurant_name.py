@@ -18,6 +18,7 @@ class InputRestaurantName(BaseTask):
             msg_text = msg['text']
             if msg_text == '/help':
                 BotOutput.sendSticker(bot, user, 'CAADBQADAQADF7xqFuFr3IshozvPAg')
+                BotOutput.send_plain_text(bot, user, "我才不幫你咧 ʅ（´◔౪◔）ʃ")
             elif msg_text == '/quit':
                 BotOutput.send_plain_text(
                     bot, user, "這樣知道要吃什麼了吧～需要幫忙再叫我齁(ouo)")

@@ -24,7 +24,7 @@ class InputFoodName(BaseTask):
                     BotOutput.send_plain_text(bot, user, "我來找找看～")
                 else:
                     BotOutput.send_plain_text(
-                        bot, user, "雖然我不太確定你說的東西，但讓我來找找看～")
+                        bot, user, "雖然我不太確定你說的東西，但讓我來找找看 (◜◔。◔◝)～")
                     BotOutput.sendSticker(bot, user, 'CAADBQADBgADF7xqFjTecVxyW5ITAg')
                 user.restaurants = PlaceDataHelper.get_restaurants(
                     user.location, user.distance, msg_text)
@@ -32,10 +32,10 @@ class InputFoodName(BaseTask):
                     BotOutput.send_restaurant_list(bot, user, user.restaurants)
                     user.next_status = '輸入店家名稱'
                 else:
-                    BotOutput.send_plain_text(bot, user, "這附近沒有你要的店家！")
-                    BotOutput.send_plain_text(bot, user, "你想要再查詢什麼食物呢？")
+                    BotOutput.send_plain_text(bot, user, "這附近沒有你要的店家(｡-_-｡) ")
+                    BotOutput.send_plain_text(bot, user, "你想要再查詢什麼食物呢 ( •́ _ •̀)？")
         else:
-            BotOutput.send_plain_text(bot, user, "你想要再查詢什麼食物呢？")
+            BotOutput.send_plain_text(bot, user, "你想要再查詢什麼食物呢 ( •́ _ •̀)？")
 
     def on_callback_query(self, bot, user, msg):
         pass
