@@ -120,3 +120,7 @@ class BotOutput():
         else:
             return BotOutput.edit_plain_text_with_inline_keyboard(
                 bot, user, user.saved_yesno2_message, text, inline_keyboard_matrix)
+
+    @staticmethod
+    def sendSticker(bot, user, sticker_id):
+        bot.sendSticker(user, sticker_id)
